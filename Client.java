@@ -46,9 +46,10 @@ public class Client
       Plateau p;
       String instruction;
 
+        p = new Plateau(stringPlateau, Integer.parseInt(this.numeroEquipe));
       do
       { 
-        p = new Plateau(stringPlateau, Integer.parseInt(this.numeroEquipe));
+        p.majTab(stringPlateau);
         //System.out.println(p.toString());
         instruction = algorithme.deplacerJoueur(p)+"\n";
         //System.out.println(instruction);

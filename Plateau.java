@@ -30,8 +30,11 @@ public class Plateau
     Boolean firstTime=false;
     int[][] oldPlat=new int[1][1];
 
-    if(tabJoueurs == null)
+    if(this.tabJoueurs == null)
+    {
       firstTime=true;
+      System.out.println("OVER HERE!!!");
+    }
 
     if(!firstTime){
       oldPlat  = new int[this.plateau.length][this.plateau[0].length];
@@ -95,6 +98,7 @@ public class Plateau
       String[] coords = paramJoueurs[i].split(",");
       short x=Short.parseShort(coords[0]);
       short y=Short.parseShort(coords[1]);
+
 
       if(firstTime)
         this.tabJoueurs[i-1] = new Joueur(x, y, i-1, this.numEquipe);
