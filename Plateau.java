@@ -27,21 +27,21 @@ public class Plateau {
                   c=cases[0].charAt(ct);
                             switch(c) {
                                   case 'D':
-                                  plateau[count%largeur][((count-(count%largeur))/hauteur)]=DUNE;
+                                  plateau[count%largeur][((count-(count%largeur))/largeur)]=DUNE;
                                   break;
                                   case 'S':
-                                  plateau[count%largeur][((count-(count%largeur))/hauteur)]=SABLE;
+                                  plateau[count%largeur][((count-(count%largeur))/largeur)]=SABLE;
                                   break;
                                   case 'F':
-                                  plateau[count%largeur][((count-(count%largeur))/hauteur)]=FRITE;
+                                  plateau[count%largeur][((count-(count%largeur))/largeur)]=FRITE;
                                   break;
                                   case 'B':
-                                  plateau[count%largeur][((count-(count%largeur))/hauteur)]=BIERE;
+                                  plateau[count%largeur][((count-(count%largeur))/largeur)]=BIERE;
                                   break;
                                   case '-':
                                   if(temp!="") {
-                                    plateau[count%largeur][((count-(count%largeur))/hauteur)]=Integer.parseInt(temp)*-1;
-                                    mou[nbrmoule]=new Moule(count%largeur,((count-(count%largeur))/hauteur),Integer.parseInt(temp));
+                                    plateau[count%largeur][((count-(count%largeur))/largeur)]=Integer.parseInt(temp)*-1;
+                                    mou[nbrmoule]=new Moule(count%largeur,((count-(count%largeur))/largeur),Integer.parseInt(temp));
                                     nbrmoule=nbrmoule+1;
                                     temp="";
                                   }
@@ -55,6 +55,7 @@ public class Plateau {
                       String[] fc = ss[2].split("-");
                       ;
                       nbrjoueur=Integer.parseInt(fc[0]);
+                      pj = new Joueur[nbrjoueur];
                       for(int i = 0;i<nbrjoueur;i++) {
                             String[] virgule = fc[i+1].split(",");
                             pj[i]=new Joueur(Short.parseShort(virgule[0]),Short.parseShort(virgule[1]));
@@ -74,8 +75,8 @@ public class Plateau {
                   public String toString() {
                     String s = new String("X :" + largeur + "Y :"+hauteur);
                       s=s+"\n";
-                    for(int i = 0 ; i < largeur ; i++) {
-                      for(int j = 0;j< hauteur;j++) {
+                    for(int i = 0 ; i <hauteur ; i++) {
+                      for(int j = 0;j< largeur;j++) {
                             s=s+"|  "+plateau[j][i];
                       }
                       s=s+"\n";
