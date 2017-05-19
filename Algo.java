@@ -17,14 +17,16 @@ public class Algo
 
     tableau[joueurs[0].getPositionX()][joueurs[0].getPositionY()]= INDICE_JOUEUR;
 
-    int nombreMoulesTrouvees = 0;
+    boolean mouleTrouvee = false;
 
+    int posXMoule = 0;
+    int posYMoule = 0;
 
     //REMPLIT TABLEAU 
-    for(int indice = this.INDICE_JOUEUR ; nombreMoulesTrouvees < p.getNombreMoules() ; indice++)
+    for(int indice = this.INDICE_JOUEUR ; !mouleTrouvee ; indice++)
     {
-      for(int x = 0; x < p.getLargeur() && nombreMoulesTrouvees < p.getNombreMoules() ; x++)
-        for(int y = 0 ; y < p.getHauteur() && nombreMoulesTrouvees < p.getNombreMoules()  ; y++)
+      for(int x = 0; x < p.getLargeur() && !mouleTrouvee; x++)
+        for(int y = 0 ; y < p.getHauteur() && !mouleTrouvee ; y++)
         {
           //deplacement gauche
           //verifie si case de gauche en dehors tab
@@ -35,7 +37,12 @@ public class Algo
 
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
-                nombreMoulesTrouvees++;
+              {
+                posXMoule = x;
+                posYMoule = y;
+                mouleTrouvee=true;
+              }
+
 
             }
           }
@@ -47,7 +54,11 @@ public class Algo
 
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
-                nombreMoulesTrouvees++;
+              {
+                posXMoule = x;
+                posYMoule = y;
+                mouleTrouvee=true;
+              }
             }
           }
           //deplacement haut
@@ -58,7 +69,11 @@ public class Algo
 
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
-                nombreMoulesTrouvees++;
+              {
+                posXMoule = x;
+                posYMoule = y;
+                mouleTrouvee=true;
+              }
 
             }
           }
@@ -70,7 +85,11 @@ public class Algo
 
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
-                nombreMoulesTrouvees++;
+              {
+                posXMoule = x;
+                posYMoule = y;
+                mouleTrouvee=true;
+              }
             }
 
           }
@@ -78,25 +97,9 @@ public class Algo
         }
 
 
-      this.afficheTableau(tableau);
-    }
+      //      this.afficheTableau(tableau);
 
-    int posXMoule = 0;
-    int posYMoule = 0;
-    int longueurChemin = 5000;
 
-    //MAINTENANT ON CHECK LA MOULE
-    for(Moule moule : p.getMoules())
-    {
-      if(moule != null)
-      {
-        if(tableau[moule.getX()][moule.getY()] != 0  && tableau[moule.getX()][moule.getY()] < longueurChemin)
-        {
-          posXMoule = moule.getX();
-          posYMoule = moule.getY();
-          longueurChemin = tableau[moule.getX()][moule.getY()];
-        }
-      }
     }
     String direction = this.trouverChemin(tableau, posXMoule, posYMoule, p.getLargeur(), p.getHauteur());
     String res = "";
@@ -115,14 +118,14 @@ public class Algo
 
   public void afficheTableau(int[][] tableau)
   {
-      for(int i=0;i<tableau.length;i++)
+    for(int i=0;i<tableau.length;i++)
+    {
+      for(int j=0;j<tableau[i].length;j++)
       {
-        for(int j=0;j<tableau[i].length;j++)
-        {
-          System.out.print(tableau[i][j]+" | ");
-        }
-        System.out.print('\n');
+        System.out.print(tableau[i][j]+" | ");
       }
+      System.out.print('\n');
+    }
   }
 
   public String trouverChemin(int[][] tableau, int x, int y, int largeurTab, int hauteurTab)
@@ -137,7 +140,7 @@ public class Algo
     boolean found = false;
     while(indice != this.INDICE_JOUEUR)
     {
-      
+
       found=false;
       //GAUCHE 
       if(posXActuelle-1 >= 0 && !found)
