@@ -18,7 +18,9 @@ public class Algo
     for(Joueur joueur : p.getJoueurs())
     {
       if(joueur.isItMe())
+        {
       monJoueur = joueur;
+        }
     }
     tableau[monJoueur.getPositionX()][monJoueur.getPositionY()]= INDICE_JOUEUR;
 
@@ -108,16 +110,20 @@ public class Algo
     }
     String direction = this.trouverChemin(tableau, posXMoule, posYMoule, p.getLargeur(), p.getHauteur());
     String res = "";
-    if(monJoueur.getNombreBieres() == 0)
+
       res = res+direction.charAt(0);
 
-    System.out.println(monJoueur.getNombreBieres());
-    for(int i = 0 ; i < monJoueur.getNombreBieres() ; i++)
+    if( monJoueur.getNombreBieres() > 0 &&  direction.length() > 1)
     {
-      if(i == 0)//ajout au debut direction
+      if(direction.length() >=  3)
+             res = res+"-"+direction.charAt(1)+"-"+direction.charAt(2);
+      else if(direction.length() == 2)
+             res = res+"-"+direction.charAt(1)+"-C";
+
         res = "B-"+res;
-      res = res+"-"+direction.charAt(i*2+2);
+   monJoueur.useBiere(); 
     }
+
     return res;
 
 

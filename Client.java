@@ -35,6 +35,7 @@ public class Client
 
     this.numeroEquipe = this.readerIn.readLine();
     System.out.println(this.numeroEquipe);
+    //    System.out.println(Integer.parseInt(this.numeroEquipe(
   }
 
   public void play()
@@ -46,10 +47,12 @@ public class Client
       Plateau p;
       String instruction;
 
-        p = new Plateau(stringPlateau, Integer.parseInt(this.numeroEquipe));
+      p = new Plateau(stringPlateau, new Integer(this.numeroEquipe).intValue());
+
       do
       { 
         p.majTab(stringPlateau);
+
         //System.out.println(p.toString());
         instruction = algorithme.deplacerJoueur(p)+"\n";
         //System.out.println(instruction);

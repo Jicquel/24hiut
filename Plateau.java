@@ -20,8 +20,9 @@ public class Plateau
   {
     this.tabJoueurs = null;
     this.tabMoules = null;
-    majTab(blockCara);
     this.numEquipe = numeroEquipe;
+    System.out.println("constr"+this.numEquipe);
+    majTab(blockCara);
   }
 
   public void majTab(String blockCara)
@@ -86,8 +87,9 @@ public class Plateau
 
     String[] paramJoueurs = decomp[2].split("-");
 
-    nbJoueurs = Integer.parseInt(paramJoueurs[0]);
+    this.nbJoueurs = Integer.parseInt(paramJoueurs[0]);
 
+    System.out.println("nbreJoueurs"+nbJoueurs);
     if(firstTime)
     {
       this.tabJoueurs = new Joueur[nbJoueurs];
@@ -100,8 +102,12 @@ public class Plateau
       short y=Short.parseShort(coords[1]);
 
 
+
       if(firstTime)
+      {
+        System.out.println("numequipe"+this.numEquipe);
         this.tabJoueurs[i-1] = new Joueur(x, y, i-1, this.numEquipe);
+      }
       else
       {
         this.tabJoueurs[i-1].move(x, y);
