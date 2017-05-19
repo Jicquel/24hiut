@@ -3,6 +3,7 @@
 public class Plateau {
           private int[][] plateau;
           private Joueur[] pj;
+          private Moule[] mou;
           private int largeur;
           private int hauteur;
           private int nbrjoueur;
@@ -21,6 +22,7 @@ public class Plateau {
                   int count=0;
                   String temp = "";
                   char c;
+                  mou = new Moule[21];
                 for(int ct = 0 ;ct<cases[0].length() ; ct++) {
                   c=cases[0].charAt(ct);
                             switch(c) {
@@ -39,6 +41,7 @@ public class Plateau {
                                   case '-':
                                   if(temp!="") {
                                     plateau[count%largeur][((count-(count%largeur))/hauteur)]=Integer.parseInt(temp)*-1;
+                                    mou[nbrmoule]=new Moule(count%largeur,((count-(count%largeur))/hauteur),Integer.parseInt(temp));
                                     nbrmoule=nbrmoule+1;
                                     temp="";
                                   }
@@ -50,14 +53,19 @@ public class Plateau {
                                 }
                             }
                       String[] fc = ss[2].split("-");
+                      ;
                       nbrjoueur=Integer.parseInt(fc[0]);
                       for(int i = 0;i<nbrjoueur;i++) {
                             String[] virgule = fc[i+1].split(",");
                             pj[i]=new Joueur(Short.parseShort(virgule[0]),Short.parseShort(virgule[1]));
                       }
+
                   }
                   public int getNombreMoules() {
                     return nbrmoule;
+                  }
+                  public Moule[] getMoules() {
+                    return mou;
                   }
                   public int[][] getTableau() {
                       return plateau;
