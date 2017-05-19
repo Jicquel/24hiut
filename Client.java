@@ -41,7 +41,7 @@ public class Client
   {
     try{
       String stringPlateau = this.readerIn.readLine();
-      System.out.println("StringPlateau : "+stringPlateau);
+      //System.out.println("StringPlateau : "+stringPlateau);
       Algo algorithme = new Algo();
       Plateau p;
       String instruction;
@@ -49,9 +49,9 @@ public class Client
       do
       { 
         p = new Plateau(stringPlateau);
-        System.out.println(p.toString());
+        //System.out.println(p.toString());
         instruction = algorithme.deplacerJoueur(p)+"\n";
-        System.out.println(instruction);
+        //System.out.println(instruction);
         this.outputSocket.writeBytes(instruction);
 
         stringPlateau = this.readerIn.readLine();

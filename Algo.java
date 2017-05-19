@@ -19,7 +19,7 @@ public class Algo
 
     int nombreMoulesTrouvees = 0;
 
-System.out.println("bite moule : "+p.getNombreMoules());
+
     //REMPLIT TABLEAU 
     for(int indice = this.INDICE_JOUEUR ; nombreMoulesTrouvees < p.getNombreMoules() ; indice++)
     {
@@ -32,7 +32,7 @@ System.out.println("bite moule : "+p.getNombreMoules());
           {
             if(plateau[x][y] !=  Plateau.DUNE && tableau[x][y] == 0 && tableau[x-1][y] == indice)
             {
-              System.out.println("GAUCHE");
+
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
                 nombreMoulesTrouvees++;
@@ -44,7 +44,7 @@ System.out.println("bite moule : "+p.getNombreMoules());
           {
             if(plateau[x][y] !=  Plateau.DUNE  && tableau[x][y] == 0 && tableau[x+1][y] == indice)
             {
-              System.out.println("DROITE");
+
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
                 nombreMoulesTrouvees++;
@@ -55,7 +55,7 @@ System.out.println("bite moule : "+p.getNombreMoules());
           {
             if(plateau[x][y] !=  Plateau.DUNE && tableau[x][y] == 0 && tableau[x][y-1] == indice)
             {
-              System.out.println("HAUT");
+
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
                 nombreMoulesTrouvees++;
@@ -67,7 +67,7 @@ System.out.println("bite moule : "+p.getNombreMoules());
           {
             if(plateau[x][y] !=  Plateau.DUNE && tableau[x][y] == 0 && tableau[x][y+1] == indice)
             {
-              System.out.println("BAS");
+
               tableau[x][y] = indice+1;
               if(plateau[x][y] <  0)
                 nombreMoulesTrouvees++;
@@ -76,8 +76,8 @@ System.out.println("bite moule : "+p.getNombreMoules());
           }
 
         }
-      System.out.println("Nombre moules : "+p.getNombreMoules());
-      System.out.println("Nombre moules trouvees : "+nombreMoulesTrouvees);
+
+
       this.afficheTableau(tableau);
     }
 
@@ -94,11 +94,21 @@ System.out.println("bite moule : "+p.getNombreMoules());
         {
           posXMoule = moule.getX();
           posYMoule = moule.getY();
+          longueurChemin = tableau[moule.getX()][moule.getY()];
         }
       }
     }
     String direction = this.trouverChemin(tableau, posXMoule, posYMoule, p.getLargeur(), p.getHauteur());
-    return ""+ direction.charAt(0);
+    String res = "";
+    if(joueurs[0].getNombreBieres() == 0)
+      res = res+direction.charAt(0);
+    for(int i = 0 ; i < joueurs[0].getNombreBieres() ; i++)
+    {
+      if(i == 0)//ajout au debut direction
+        res = "B-"+res;
+      res = res+"-"+direction.charAt(i*2+2);
+    }
+    return res;
 
 
   }
@@ -134,7 +144,7 @@ System.out.println("bite moule : "+p.getNombreMoules());
       {
         if(tableau[posXActuelle-1][posYActuelle] == (indice -1))
         {
-          System.out.println("E");
+
           chemin = "E"+chemin;
           posXActuelle = posXActuelle-1;
           found = true;
@@ -146,7 +156,7 @@ System.out.println("bite moule : "+p.getNombreMoules());
       {
         if(tableau[posXActuelle+1][posYActuelle] == (indice -1))
         {
-          System.out.println("O");
+
           chemin = "O"+chemin;
           posXActuelle = posXActuelle+1;
           found = true;
@@ -160,7 +170,7 @@ System.out.println("bite moule : "+p.getNombreMoules());
       {
         if(tableau[posXActuelle][posYActuelle-1] == (indice -1))
         {
-          System.out.println("S");
+
           chemin = "S"+chemin;
           posYActuelle = posYActuelle-1;
           found = true;
@@ -171,13 +181,13 @@ System.out.println("bite moule : "+p.getNombreMoules());
       {
         if(tableau[posXActuelle][posYActuelle+1] == (indice -1))
         {
-          System.out.println("N");
+
           chemin = "N"+chemin;
           posYActuelle = posYActuelle+1;
           found = true;
         }
       }
-indice --;
+      indice --;
 
     }
 
