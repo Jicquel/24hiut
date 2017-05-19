@@ -17,6 +17,8 @@ public class Plateau
 
 	public Plateau(String blockCara)
 	{
+		this.tabJoueurs = null;
+		this.tabMoules = null;
 		majTab(blockCara);
 	}
 
@@ -24,6 +26,12 @@ public class Plateau
 	{
 		int i, j, k;
 		int nbJoueurs;
+		int[][] oldPlat = new int[this.plateau.length][this.plateau[0].length];
+
+		for(i=0 ; i<oldPlat.length ; i++)
+			for(j=0 ; j<oldPlat[0].length ; j++)
+				oldPlat[i][j]=this.plateau[i][j];
+
 		Moule[] moules = new Moule[20];
 
 		nbMoules=0;
@@ -68,12 +76,37 @@ public class Plateau
 
 		nbJoueurs = Integer.parseInt(paramJoueurs[0]);
 
-		this.tabJoueurs = new Joueur[nbJoueurs];
+		Boolean firstTime=false;
+
+		if(tabJoueurs == null)
+		{
+			firstTime=true;
+			this.tabJoueurs = new Joueur[nbJoueurs];
+		}
 
 		for(i=1 ; i<nbJoueurs+1 ; i++)
 		{
 			String[] coords = paramJoueurs[i].split(",");
-			this.tabJoueurs[i-1] = new Joueur(Short.parseShort(coords[0]), Short.parseShort(coords[1]));
+			short x=Short.parseShort(coords[0]);
+			short y=Short.parseShort(coords[1]);
+
+			if(firstTime)
+				this.tabJoueurs[i-1] = new Joueur(x, y, i-1);
+			else
+			{
+				this.tabJoueurs[i-1].move(x, y);
+				switch(oldPlat[x][y])
+				{
+					case BIERE:
+						this.tabJoueurs[i-1].grabBiere();
+					break;
+					case FRITE:
+						this.tabJoueurs[i-1].grabFrite();
+					break;
+					default:
+					break;
+				}
+			}
 		}
 
 		this.tabMoules = Arrays.copyOf(moules, nbMoules);
