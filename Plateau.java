@@ -8,7 +8,7 @@ public class Plateau
 	private int largeur;
 	private int hauteur;
 	private int nbrjoueur;
-	private int nbrMoule = 0;
+	private int nbMoules = 0;
 	public final static int  DUNE = 5000;
 	public final static int  SABLE = 5001;
 	public final static int FRITE = 5002;
@@ -23,9 +23,10 @@ public class Plateau
 	public void majTab(String blockCara)
 	{
 		int i, j, k;
-		int nbMoules=0;
 		int nbJoueurs;
 		Moule[] moules = new Moule[20];
+
+		nbMoules=0;
 
 		String[] decomp = blockCara.split("/");
 
@@ -72,7 +73,7 @@ public class Plateau
 		for(i=1 ; i<nbJoueurs+1 ; i++)
 		{
 			String[] coords = paramJoueurs[i].split(",");
-			this.tabJoueurs[i] = new Joueur(Short.parseShort(coords[0]), Short.parseShort(coords[1]));
+			this.tabJoueurs[i-1] = new Joueur(Short.parseShort(coords[0]), Short.parseShort(coords[1]));
 		}
 
 		this.tabMoules = Arrays.copyOf(moules, nbMoules);
@@ -90,7 +91,7 @@ public class Plateau
 
 	public int getNombreMoules()
 	{
-		return nbrMoule;
+		return nbMoules;
 	}
 	public Moule[] getMoules()
 	{

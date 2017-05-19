@@ -49,6 +49,7 @@ public class Client
       do
       { 
         p = new Plateau(stringPlateau);
+        System.out.println(p.toString());
         instruction = algorithme.deplacerJoueur(p)+"\n";
         System.out.println(instruction);
         this.outputSocket.writeBytes(instruction);

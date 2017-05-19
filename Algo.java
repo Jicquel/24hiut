@@ -19,7 +19,7 @@ public class Algo
 
     int nombreMoulesTrouvees = 0;
 
-
+System.out.println("bite moule : "+p.getNombreMoules());
     //REMPLIT TABLEAU 
     for(int indice = this.INDICE_JOUEUR ; nombreMoulesTrouvees < p.getNombreMoules() ; indice++)
     {
@@ -98,7 +98,6 @@ public class Algo
       }
     }
     String direction = this.trouverChemin(tableau, posXMoule, posYMoule, p.getLargeur(), p.getHauteur());
-    System.out.println("bite");
     return ""+ direction.charAt(0);
 
 
@@ -128,6 +127,7 @@ public class Algo
     boolean found = false;
     while(indice != this.INDICE_JOUEUR)
     {
+      
       found=false;
       //GAUCHE 
       if(posXActuelle-1 >= 0 && !found)
