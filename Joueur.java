@@ -5,11 +5,12 @@ public class Joueur
 	private  int id;
 	private  short frites;
 	private  short bieres;
+        private int numEquipe;
 
 	private  short x;
 	private  short y;
 
-	public Joueur(short posx,  short posy, int id0)
+	public Joueur(short posx,  short posy, int id0, int numeroEquipe)
 	{
 		this.frites=0;
 		this.bieres=0;
@@ -17,7 +18,14 @@ public class Joueur
 		this.x=posx;
 		this.y=posy;
 		this.id=id0;
+                this.numEquipe = numeroEquipe;
 	}
+
+
+        public Boolean isItMe()
+        {
+          return this.numEquipe == this.id;
+        }
 
 	public void move( short posx,  short posy)
 	{
