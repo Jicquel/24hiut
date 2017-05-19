@@ -1,15 +1,14 @@
-import java.utils;
 
 public class Joueur
 {
-	private unsigned int points;
-	private unsigned short frites;
-	private unsigned short bieres;
+	private  int points;
+	private  short frites;
+	private  short bieres;
 
-	private unsigned short x;
-	private unsigned short y;
+	private  short x;
+	private  short y;
 
-	public Joueur(unsigned short posx, unsigned short posy)
+	public Joueur( short posx,  short posy)
 	{
 		this.frites=0;
 		this.bieres=0;
@@ -18,13 +17,19 @@ public class Joueur
 		this.y=posy;
 	}
 
-	public void move(unsigned short posx, unsigned short posy)
+	public void move( short posx,  short posy)
 	{
 		this.x=posx;
 		this.y=posy;
 	}
 
-	public void grabMoule(unsigned short p)
+	public short getPositionX() {
+		return x;
+	}
+	public short getPositionY() {
+			return y;
+	}
+	public void grabMoule( short p)
 	{
 		this.points+=p;
 	}
@@ -37,11 +42,11 @@ public class Joueur
 	{
 		this.bieres++;
 	}
-	public void grabFrite()
+	public void useFrite()
 	{
 		this.frites--;
 	}
-	public void grabBiere()
+	public void useBiere()
 	{
 		this.bieres--;
 	}
