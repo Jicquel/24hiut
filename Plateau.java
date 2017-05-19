@@ -1,4 +1,4 @@
-
+import java.util.Arrays;
 
 public class Plateau
 {
@@ -40,24 +40,24 @@ public class Plateau
 
 		for(i=0 ; i<terrain.length ; i++)
 		{
-			c=terrain[i];
+			String c=terrain[i];
 			switch(c)
 			{
-				case 'D':
-					plateau[count%largeur][((count-(count%largeur))/largeur)]=DUNE;
+				case "D":
+					plateau[i%largeur][((i-(i%largeur))/largeur)]=DUNE;
 					break;
-				case 'S':
-					plateau[count%largeur][((count-(count%largeur))/largeur)]=SABLE;
+				case "S":
+					plateau[i%largeur][((i-(i%largeur))/largeur)]=SABLE;
 					break;
-				case 'F':
-					plateau[count%largeur][((count-(count%largeur))/largeur)]=FRITE;
+				case "F":
+					plateau[i%largeur][((i-(i%largeur))/largeur)]=FRITE;
 					break;
-				case 'B':
-					plateau[count%largeur][((count-(count%largeur))/largeur)]=BIERE;
+				case "B":
+					plateau[i%largeur][((i-(i%largeur))/largeur)]=BIERE;
 					break;
 				default:
-					plateau[count%largeur][((count-(count%largeur))/largeur)]=Integer.parseInt(i)*-1;
-					moules[nbMoules] = new Moule(count%largeur, ((count-(count%largeur))/largeur), Integer.parseInt(i));
+					plateau[i%largeur][((i-(i%largeur))/largeur)]=Integer.parseInt(c)*-1;
+					moules[nbMoules] = new Moule(i%largeur, ((i-(i%largeur))/largeur), Integer.parseInt(c));
 					nbMoules++;
 					break;
 			}
@@ -69,13 +69,13 @@ public class Plateau
 
 		this.tabJoueurs = new Joueur[nbJoueurs];
 
-		for(i=0 ; i<nbJoueurs ; i++)
+		for(i=1 ; i<nbJoueurs+1 ; i++)
 		{
-			String coords = paramJoueurs[i].split(",");
-			this.tabJoueurs[i] = New Joueur(Integer.parseInt(coords[0]), integer.parseInt(coords[1]));
+			String[] coords = paramJoueurs[i].split(",");
+			this.tabJoueurs[i] = new Joueur(Short.parseShort(coords[0]), Short.parseShort(coords[1]));
 		}
 
-		this.tabMoules = copyOf(moules, nbMoules);
+		this.tabMoules = Arrays.copyOf(moules, nbMoules);
 	}
 
 	public int getHauteur()
@@ -90,7 +90,7 @@ public class Plateau
 
 	public int getNombreMoules()
 	{
-		return nbrmoule;
+		return nbrMoule;
 	}
 	public Moule[] getMoules()
 	{

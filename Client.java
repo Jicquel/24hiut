@@ -5,14 +5,14 @@ import java.net.*;
 public class Client
 {
 
-  private final int nomEquipe = 32;
+  private final String nomEquipe = "C++ ce que c'était\n";
   private DataInputStream inputSocket;
   private DataOutputStream outputSocket;
   private BufferedReader readerIn;
 
   private String serverAddr;
   private int portServ;
-  private int numeroEquipe;
+  private String numeroEquipe;
 
   public Client(String serverAddr,int portServ)
   {
@@ -31,25 +31,30 @@ public class Client
 
 
     //ENVOI NOM EQUIPE
-    this.outputSocket.writeByte(this.nomEquipe);
+    this.outputSocket.writeBytes(this.nomEquipe);
 
-    this.numeroEquipe = this.inputSocket.readInt();
+    this.numeroEquipe = this.readerIn.readLine();
     System.out.println(this.numeroEquipe);
   }
 
   public void play()
   {
     try{
-
       String stringPlateau = this.readerIn.readLine();
+      System.out.println("StringPlateau : "+stringPlateau);
       Algo algorithme = new Algo();
       Plateau p;
+      String instruction;
+
       do
       { 
         p = new Plateau(stringPlateau);
-        this.outputSocket.writeBytes(algorithme.deplacerJoueur(p));
+        instruction = algorithme.deplacerJoueur(p)+"\n";
+        System.out.println(instruction);
+        this.outputSocket.writeBytes(instruction);
 
         stringPlateau = this.readerIn.readLine();
+
       }while(!stringPlateau.equals("FIN"));
     }catch(IOException e)
     {
