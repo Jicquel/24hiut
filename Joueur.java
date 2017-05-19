@@ -59,6 +59,7 @@ public class Joueur
 	}
 	public void grabBiere()
 	{
+    System.out.println("ok");
 		this.bieres++;
 	}
 	public void useFrite()

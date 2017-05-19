@@ -13,9 +13,14 @@ public class Algo
     int[][] plateau = p.getTableau();
     int[][] tableau = new int[p.getLargeur()][p.getHauteur()];
 
-    Joueur[] joueurs = p.getJoueurs();
 
-    tableau[joueurs[0].getPositionX()][joueurs[0].getPositionY()]= INDICE_JOUEUR;
+    Joueur monJoueur= null;
+    for(Joueur joueur : p.getJoueurs())
+    {
+      if(joueur.isItMe())
+      monJoueur = joueur;
+    }
+    tableau[monJoueur.getPositionX()][monJoueur.getPositionY()]= INDICE_JOUEUR;
 
     boolean mouleTrouvee = false;
 
@@ -103,9 +108,11 @@ public class Algo
     }
     String direction = this.trouverChemin(tableau, posXMoule, posYMoule, p.getLargeur(), p.getHauteur());
     String res = "";
-    if(joueurs[0].getNombreBieres() == 0)
+    if(monJoueur.getNombreBieres() == 0)
       res = res+direction.charAt(0);
-    for(int i = 0 ; i < joueurs[0].getNombreBieres() ; i++)
+
+    System.out.println(monJoueur.getNombreBieres());
+    for(int i = 0 ; i < monJoueur.getNombreBieres() ; i++)
     {
       if(i == 0)//ajout au debut direction
         res = "B-"+res;
